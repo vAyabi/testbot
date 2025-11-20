@@ -1,0 +1,7 @@
+# Node
+node_modules
+npm-debug.log
+yarn.lock
+
+# Environnement / secrets (si vous en ajoutez plus tard)
+.env
