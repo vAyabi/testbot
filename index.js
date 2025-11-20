@@ -3,10 +3,8 @@
 
 const { Client, GatewayIntentBits } = require("discord.js");
 
-// Préfixe des commandes
 const PREFIX = "!";
 
-// Client avec les intents nécessaires pour lire les messages
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -20,20 +18,25 @@ client.once("ready", () => {
   console.log(`Bot connecté en tant que ${client.user.tag}`);
 });
 
-// Écoute des messages
 client.on("messageCreate", (message) => {
-  // On ignore les bots
   if (message.author.bot) return;
-
-  // On ignore les messages sans préfixe
   if (!message.content.startsWith(PREFIX)) return;
 
-  // On enlève le préfixe et on sépare commande + arguments
   const args = message.content.slice(PREFIX.length).trim().split(/\s+/);
   const command = args.shift().toLowerCase();
 
   console.log(`Commande reçue : ${command} avec args :`, args);
 
+  if (command === "ping") {
+    handlePingCommand(message);
+  } else {
+    message.reply("Commande inconnue. Essaie `!ping` pour tester le bot.");
+  }
+});
+
+// Feature 2 : commande !ping
+function handlePingCommand(message) {
+  const sentAt = Date.now();
   // Pour l'instant, aucune vraie fonctionnalité :
   // on se contente de répondre un message générique.
   message.reply("Commande reçue, mais les fonctionnalités arriveront plus tard 😉");
@@ -67,6 +70,11 @@ function handleUserInfoCommand(message) {
   message.channel.send(lines.join("\n"));
 }
 
+  message.channel.send("Pong ?").then((sentMessage) => {
+    const latency = Date.now() - sentAt;
+    sentMessage.edit(`Pong ! Latence ≈ **${latency}ms**`);
+  });
+}
 // ⚠️ Pour l’instant on met un token placeholder.
 // Quand vous voudrez vraiment lancer le bot, remplacez par votre vrai token
 // ou ajoutez un système .env dans un autre commit.
