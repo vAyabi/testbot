@@ -1,4 +1,4 @@
-// index.js
+hj// index.js
 // Feature 1 : système de commandes avec préfixe
 
 const { Client, GatewayIntentBits } = require("discord.js");
@@ -6,7 +6,7 @@ const { Client, GatewayIntentBits } = require("discord.js");
 const PREFIX = "!";
 
 const client = new Client({
-  intents: [
+  intents: [hjyj
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent
