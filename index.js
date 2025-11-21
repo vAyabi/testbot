@@ -1,5 +1,5 @@
 // index.js
-// Bot Discord squelette, aucune fonctionnalité pour l’instant.
+// Feature 1 : système de commandes avec préfixe
 
 const { Client, GatewayIntentBits } = require("discord.js");
 
@@ -13,7 +13,7 @@ const client = new Client({
   ]
 });
 
-// Événement déclenché quand le bot est connecté
+// Quand le bot est prêt
 client.once("ready", () => {
   console.log(`Bot connecté en tant que ${client.user.tag}`);
 });
@@ -37,6 +37,38 @@ client.on("messageCreate", (message) => {
 // Feature 2 : commande !ping
 function handlePingCommand(message) {
   const sentAt = Date.now();
+  // Pour l'instant, aucune vraie fonctionnalité :
+  // on se contente de répondre un message générique.
+  message.reply("Commande reçue, mais les fonctionnalités arriveront plus tard 😉");
+});
+
+// Feature 3 : commande !help
+function handleHelpCommand(message) {
+  message.channel.send(
+    [
+      "Voici les commandes disponibles :",
+      "`!ping` - Vérifie si le bot répond et affiche la latence.",
+      "`!help` - Affiche ce message d’aide.",
+      "`!userinfo` - Affiche des infos sur toi.",
+    ].join("\n"),
+  );
+}
+
+// Feature 3 : commande !userinfo
+function handleUserInfoCommand(message) {
+  const member = message.member;
+  const user = message.author;
+
+  const lines = [
+    `👤 Pseudo : **${user.username}**`,
+    `🆔 ID : \`${user.id}\``,
+    member
+      ? `📅 A rejoint le serveur : **${member.joinedAt.toLocaleDateString()}**`
+      : "📅 Info de serveur non disponible.",
+  ];
+
+  message.channel.send(lines.join("\n"));
+}
 
   message.channel.send("Pong ?").then((sentMessage) => {
     const latency = Date.now() - sentAt;
