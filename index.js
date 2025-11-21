@@ -46,6 +46,6 @@ function handlePingCommand(message) {
 // ⚠️ Pour l’instant on met un token placeholder.
 // Quand vous voudrez vraiment lancer le bot, remplacez par votre vrai token
 // ou ajoutez un système .env dans un autre commit.
-const TOKEN = "A_REMPLACER_PAR_UN_VRAI_TOKEN";
+const TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 client.login(TOKEN);
