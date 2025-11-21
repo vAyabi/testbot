@@ -3,7 +3,7 @@ hj// index.js
 
 const { Client, GatewayIntentBits } = require("discord.js");
 
-const PREFIX = "!";
+const PREFIX = "!";rgrgrg
 
 const client = new Client({
   intents: [hjyj
